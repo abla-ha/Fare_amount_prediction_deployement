@@ -46,7 +46,7 @@ TaxiFarePredictor/
 │           ├── styles.css
 ├── model/
 │   ├── model.pkl
-
+```
 
 ## Setup and Installation
 
