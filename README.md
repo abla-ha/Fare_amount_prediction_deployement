@@ -17,7 +17,7 @@ This Django project predicts taxi fares based on user input, including departure
 - HTML/CSS for front-end
 
 ## Project Structure
-
+```plaintext
 TaxiFarePredictor/
 ├── manage.py
 ├── TaxiFarePredictor/
