@@ -1,0 +1,43 @@
+<!-- /templates/predict.html -->
+<h1>Predict Taxi Fare</h1>
+<div id="map" style="height: 400px;"></div>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" id="distance" name="distance">
+    <button type="submit">Predict Fare</button>
+</form>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+<script>
+    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-74.0060, 40.7128], // New York City coordinates
+        zoom: 12
+    });
+
+    var startMarker, endMarker;
+
+    map.on('click', function(e) {
+        if (!startMarker) {
+            startMarker = new mapboxgl.Marker({ color: 'green' })
+                .setLngLat(e.lngLat)
+                .addTo(map);
+        } else if (!endMarker) {
+            endMarker = new mapboxgl.Marker({ color: 'red' })
+                .setLngLat(e.lngLat)
+                .addTo(map);
+
+            var url = `https://api.mapbox.com/directions/v5/mapbox/driving/${startMarker.getLngLat().lng},${startMarker.getLngLat().lat};${endMarker.getLngLat().lng},${endMarker.getLngLat().lat}?access_token=${mapboxgl.accessToken}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var distance = data.routes[0].distance / 1000; // Convert meters to kilometers
+                    document.getElementById('distance').value = distance;
+                });
+        }
+    });
+</script>
