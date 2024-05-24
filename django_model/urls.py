@@ -20,6 +20,6 @@ from django_model_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('prediction/', views.predict_view.as_view(), name = 'model_prediction')
+    path('prediction/', views.predict_view, name = 'predict_view')
 
 ]

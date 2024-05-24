@@ -1,3 +1,15 @@
-<!-- /templates/result.html -->
-<h1>Predicted Fare: ${{ fare }}</h1>
-<a href="{% url 'predict_view' %}">Predict another fare</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predicted Fare</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'images/taxi.png' %}" alt="Car" class="car-image">
+        <h1>Predicted Fare: ${{ fare }}</h1>
+        <a href="{% url 'predict_view' %}">Predict another fare</a>
+    </div>
+</body>
+</html>

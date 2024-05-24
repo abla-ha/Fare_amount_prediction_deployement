@@ -1,10 +1,9 @@
-# fare_prediction/utils.py
-import pickle
+import joblib
 import numpy as np
 
 def load_model():
-    with open('path/to/your/model.pkl', 'rb') as f:
-        model = pickle.load(f)
+    # Load the model using joblib
+    model = joblib.load('/Users/mac/Documents/Django_deployment/django_model/model/best_model_1.pkl')
     return model
 
 def predict_fare(year, distance, bearing):

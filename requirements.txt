@@ -1,0 +1,3 @@
+Django
+djangorestframework
+scikit_learn==1.2.2
